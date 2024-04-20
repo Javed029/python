@@ -1,0 +1,46 @@
+import tkinter as tk
+from tkinter import messagebox
+
+class BMI:
+    def __init__(self):
+        self.root = tk.Tk()
+        print("*****WELCOME TO BMI CALCULATOR*****")
+        self.root.title("BMI Calculator")
+        self.label = tk.Label(self.root, text="BMI Calculator")
+        self.label.pack()
+        # Creating labels and entry fields for age, height, and weight
+        self.label_age = tk.Label(self.root, text="Age:")
+        self.label_age.pack()
+        self.entry_age = tk.Entry(self.root)
+        self.entry_age.pack()
+        self.label_height = tk.Label(self.root, text="Height (cm):")
+        self.label_height.pack()
+        self.entry_height = tk.Entry(self.root)
+        self.entry_height.pack()
+        self.label_weight = tk.Label(self.root, text="Weight (kg):")
+        self.label_weight.pack()
+        self.entry_weight = tk.Entry(self.root)
+        self.entry_weight.pack()
+        self.button = tk.Button(self.root, text="Calculate", command=self.calculate_bmi)
+        self.button.pack()
+
+    def calculate_bmi(self):
+        weight = float(self.entry_weight.get())
+        height = float(self.entry_height.get()) / 100  # convert cm to m
+
+        bmi = weight / (height ** 2)
+
+        if bmi < 18.5:
+            messagebox.showinfo("BMI Result", "You are underweight.")
+        elif 18.5 <= bmi <= 24.9:
+            messagebox.showinfo("BMI Result", "You have a normal weight.")
+        elif 25 <= bmi <= 29.9:
+            messagebox.showinfo("BMI Result", "You are overweight.")
+        else:
+            messagebox.showinfo("BMI Result", "You are obese.")
+
+    def run(self):
+        self.root.mainloop()
+
+game = BMI()
+game.run()
